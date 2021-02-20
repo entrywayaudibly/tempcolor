@@ -2,7 +2,7 @@ Makes using redshift less of a pain.
 
 ## install
 
-- place the contents of this repo inside, wherever you want;
+- place the contents of this repo wherever you want;
 - make `tempcolor` executable: `chmod +x ./tempcolor`;
 - feel free to create a symbolic link for `tempcolor`.
   - be it in `/usr/bin`;
