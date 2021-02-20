@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# https://stackoverflow.com/questions/59895/how-to-get-the-source-directory-of-a-bash-script-from-within-the-script-itself
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  PROJECT_ROOT="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$PROJECT_ROOT/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+PROJECT_ROOT="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+
+CONFIG_PATH="${HOME}"/.config/tempcolorrc
+
+argument=$1
+value=$2
+
+source "${PROJECT_ROOT}"/lib/manifest.sh
+
+if [[ ! -e $CONFIG_PATH ]]; then store_temperature 3000; fi
+source $CONFIG_PATH
+
+case $argument in
+
+  -inc)
+    increase_color_temperature $value
+    ;;
+
+  -dec)
+    decrease_color_temperature $value
+    ;;
+
+  -x)
+    redshift -x
+    echo "redshift color reset..."
+    ;;
+
+  *)
+    set_color_temperature $argument
+    ;;
+esac
+
