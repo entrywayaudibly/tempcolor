@@ -30,8 +30,7 @@ function increase_color_temperature() {
 
   validate_temperature $temperature
 
-  redshift -x
-  redshift -O $temperature
+  redshift -P -O $temperature -b $previous_brightness
 
   echo "increased redshift color from ${previous_temperature}K to ${temperature}K..."
 
@@ -51,8 +50,7 @@ function decrease_color_temperature() {
 
   validate_temperature $temperature
 
-  redshift -x
-  redshift -O $temperature
+  redshift -P -O $temperature -b $previous_brightness
 
   echo "decreased redshift color from ${previous_temperature}K to ${temperature}K..."
 
@@ -66,8 +64,7 @@ function set_color_temperature() {
 
   validate_temperature $temperature
 
-  redshift -x
-  redshift -O $temperature
+  redshift -P -O $temperature -b $previous_brightness
 
   echo "redshift color set to ${temperature}K..."
 
@@ -97,10 +94,9 @@ function increase_brightness() {
   
   validate_brightness $brightness
 
-  redshift -x
   
   # Somehow you need to pass in a temperature to adjust the brightness, prevent "Waiting for initial location to become available..." message
-  redshift -O $previous_temperature -b $brightness
+  redshift -P -O $previous_temperature -b $brightness
 
   echo "increased redshift brightness from ${previous_brightness} to ${brightness}"
 
@@ -119,8 +115,7 @@ function decrease_brightness() {
   
   validate_brightness $brightness
 
-  redshift -x
-  redshift -O $previous_temperature -b $brightness
+  redshift -P -O $previous_temperature -b $brightness
 
   echo "decreased redshift brightness from ${previous_brightness} to ${brightness}"
 
