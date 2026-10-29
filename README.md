@@ -19,3 +19,8 @@ Makes using redshift less of a pain.
 
 **set value using one shot mode (-O)**
 `tempcolor <value>`
+
+**incrementally change brightness**
+<value> should be from `.1` to `1.0`
+`tempcolor -binc <value>`
+`tempcolor -bdec <value>`
